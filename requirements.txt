@@ -4,5 +4,8 @@ azure-functions
 azure-digitaltwins-core
 azure-identity
 
+openpyxl
+
 git+https://github.com/Cosmo-Tech/cosmotech-api-python-client.git#egg=cosmotech_api
+
 git+https://github.com/Cosmo-Tech/supplychain-python-library.git@main#egg=SupplyChain
