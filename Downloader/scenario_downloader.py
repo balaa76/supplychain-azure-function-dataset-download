@@ -15,7 +15,6 @@ from cosmotech_api.api.workspace_api import WorkspaceApi
 
 from openpyxl import load_workbook
 
-
 class ScenarioDownloader:
 
     def __init__(self, workspace_id: str, organization_id: str):
@@ -40,7 +39,7 @@ class ScenarioDownloader:
                                                              scenario_id=scenario_id)
         return scenario_data
 
-    def download_dataset(self, dataset_id: str) -> (str, str, Union[str, None]):
+    def download_dataset(self, dataset_id: str) -> dict:
         with cosmotech_api.ApiClient(self.configuration) as api_client:
             api_instance = DatasetApi(api_client)
 
