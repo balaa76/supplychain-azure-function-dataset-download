@@ -88,7 +88,14 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
         configuration['ActivateUncertainties'] = True
         handler.handle_uncertainties_settings()
 
-    handler.handle_simple_simulation()
+    _tmp_params = dict(_p.get_all_parameters())
+    check = True
+    for name in ['start_date', 'end_date', 'simulation_granularity']:
+        if name not in _tmp_params:
+            check = False
+            break
+    if check:
+        handler.handle_simple_simulation()
     handler.handle_model_behavior()
     handler.handle_flow_management_policies()
 
