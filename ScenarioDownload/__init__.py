@@ -4,6 +4,7 @@ from Supplychain.Generic.memory_folder_io import MemoryFolderIO
 from Supplychain.Transform.from_table_to_dict import FromTableToDictConverter
 from Supplychain.Generic.cosmo_api_parameters import CosmoAPIParameters
 from Supplychain.Transform.patch_dict_with_parameters import DictPatcher
+from Supplychain.Generic.csv_folder_writer import CSVWriter
 
 import tempfile
 import os
@@ -34,6 +35,17 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
 
     parameters = []
     for parameter_name, value in content['parameters'].items():
+        if parameter_name == "demand_plan":
+            demand_plan_dir = os.path.join(tmp_parameter_dir, "demand_plan")
+            os.mkdir(demand_plan_dir)
+            _writer = CSVWriter(output_folder=demand_plan_dir)
+            demand_plan_content = content['datasets'][value]['content']['content']
+            _writer.write_from_list(demand_plan_content, 'content')
+            parameters.append({
+                "parameterId": parameter_name,
+                "value": "demand_plan",
+                "varType": "%DATASETID%"
+            })
         if value in content['datasets']:
             continue
         parameters.append({
