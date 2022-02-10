@@ -1,4 +1,4 @@
-from Downloader.main import generate_main
+from cosmotech_scenario_download.generate_main import generate_main
 from ScenarioDownload import apply_update as update_dataset
 from Supplychain.Generic.memory_folder_io import MemoryFolderIO
 from Supplychain.Transform.from_dict_to_table import FromDictToTableConverter
