@@ -46,6 +46,17 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
                 "value": "demand_plan",
                 "varType": "%DATASETID%"
             })
+        if parameter_name == "transport_duration":
+            transport_duration_dir = os.path.join(tmp_parameter_dir, "transport_duration")
+            os.mkdir(transport_duration_dir)
+            _writer = CSVWriter(output_folder=transport_duration_dir)
+            transport_duration_content = content['datasets'][value]['content']['content']
+            _writer.write_from_list(transport_duration_content, 'content')
+            parameters.append({
+                "parameterId": parameter_name,
+                "value": "transport_duration",
+                "varType": "%DATASETID%"
+            })
         if value in content['datasets']:
             continue
         parameters.append({
