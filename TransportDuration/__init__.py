@@ -20,6 +20,12 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
         dt.convert()
     columns_names = ['source', 'target', 'Duration']
     columns = [{'field': _name} for _name in columns_names]
+    for c in columns:
+        if c['field'] in ['source', 'target']:
+            c['type'] = ['nonEditable']
+        if c['field'] in ['Duration']:
+            c['type'] = ['int']
+            c['minValue'] = 0
     out = list()
     for element in w.files['Transport']:
         out.append(dict(source=element['source'], target=element['target'], Duration=element['Duration']))
