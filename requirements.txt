@@ -1,13 +1,4 @@
 # Do not include azure-functions-worker as it may conflict with the Azure Functions platform
 
-azure-functions
-azure-digitaltwins-core
-azure-identity
-
-openpyxl
-
-cosmotech-api
-
-git+ssh://git@github.com/Cosmo-Tech/supplychain-python-library.git@main#egg=SupplyChain
-
-git+ssh://git@github.com/Cosmo-Tech/azure-function-scenario-download.git#egg=cosmotech_scenario_download
+CosmoTech-Acceleration-Library
+CosmoTech-SupplyChain

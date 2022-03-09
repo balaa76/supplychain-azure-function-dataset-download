@@ -1,4 +1,4 @@
-from cosmotech_scenario_download.generate_main import generate_main
+from CosmoTech_Acceleration_Library.Accelerators.scenario_download.azure_function_main import generate_main
 
 from Supplychain.Generic.memory_folder_io import MemoryFolderIO
 from Supplychain.Transform.from_table_to_dict import FromTableToDictConverter
