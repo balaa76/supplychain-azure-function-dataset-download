@@ -34,29 +34,24 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
     tmp_dataset_dir = tempfile.mkdtemp()
 
     parameters = []
+
     for parameter_name, value in content['parameters'].items():
-        if parameter_name == "demand_plan":
-            demand_plan_dir = os.path.join(tmp_parameter_dir, "demand_plan")
-            os.mkdir(demand_plan_dir)
-            _writer = CSVWriter(output_folder=demand_plan_dir)
-            demand_plan_content = content['datasets'][value]['content']['content']
-            _writer.write_from_list(demand_plan_content, 'content')
-            parameters.append({
-                "parameterId": parameter_name,
-                "value": "demand_plan",
-                "varType": "%DATASETID%"
-            })
-        if parameter_name == "transport_duration":
-            transport_duration_dir = os.path.join(tmp_parameter_dir, "transport_duration")
-            os.mkdir(transport_duration_dir)
-            _writer = CSVWriter(output_folder=transport_duration_dir)
-            transport_duration_content = content['datasets'][value]['content']['content']
-            _writer.write_from_list(transport_duration_content, 'content')
-            parameters.append({
-                "parameterId": parameter_name,
-                "value": "transport_duration",
-                "varType": "%DATASETID%"
-            })
+        def add_file_parameter(compared_parameter_name: str):
+            if parameter_name == compared_parameter_name:
+                param_dir = os.path.join(tmp_parameter_dir, compared_parameter_name)
+                os.mkdir(param_dir)
+                _writer = CSVWriter(output_folder=param_dir)
+                param_content = content['datasets'][value]['content']['content']
+                _writer.write_from_list(param_content, 'content')
+                parameters.append({
+                    "parameterId": parameter_name,
+                    "value": parameter_name,
+                    "varType": "%DATASETID%"
+                })
+
+        add_file_parameter("demand_plan")
+        add_file_parameter("transport_duration")
+        add_file_parameter("production_resource_opening_time")
         if value in content['datasets']:
             continue
         parameters.append({
