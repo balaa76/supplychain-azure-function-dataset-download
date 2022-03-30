@@ -1,4 +1,4 @@
-# supplychain-azure-function-scenario-download
+# supplychain-azure-function-dataset-download
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCosmo-Tech%2Fsupplychain-azure-function-dataset-download%2Fmain%2Fdeploy%2Fazuredeploy.json)
 
