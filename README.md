@@ -12,16 +12,15 @@ This azure function app aims to be integrated in the Cosmo Tech Supply Chain Web
 
 ## Pre-Requisites
 
-1. Dedicated App registration with Cosmo API access permission configured and declare in ADT : app ID + secret needed<br>
-
-2. App registration created for Cosmo webapp : only app ID needed
+- Dedicated App registration created (see details below)
 
 <br>
 
-### Dedicated app registration to be created  :
-- *_Organization.user_* permission on the Cosmo Tech Platform API   
-- Client secret created
-- _Azure Digital Twin Data Reader_ permission on the Azure Data Explorer instance 
+### Dedicated app registration :
+1. Create a new app registration
+2. Add a API permission to the Cosmo Tech Platform API, choose the permission type *_Application_* (not *_Delegated_*) and select the permission *_Organization.user_*
+3. Create a client secret
+4. In the related Azure Digital Twins resources, assign the role _Azure Digital Twin Data Reader_  to app registration 
 <br><br>
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCosmo-Tech%2Fsupplychain-azure-function-dataset-download%2Fmain%2Fdeploy%2Fazuredeploy.json)
@@ -32,16 +31,16 @@ This azure function app aims to be integrated in the Cosmo Tech Supply Chain Web
 
 | Parameter | Note |
 | ----------- | ----------- |
-| Subscription | Choose same as related platform and webapp |
-| Resource group | Choose same as related platform and webapp |
+| Subscription | Choose same as the related platform and webapp |
+| Resource group | Choose same as the related platform and webapp |
 | Region | Choose same as related platform and webapp |
-| Site Name | Function App Name	Choose a name for the function app |
-| Storage Account Name | Storage account required for the function app |
-| Location | Keep pre-populated value |
+| Site Name | Choose a name for the function app or leave the default value for auto-generated name |
+| Storage Account Name | Choose a name for the storage account required for the function app or leave the default value for auto-generated name |
+| Location | Location for the resources to be created (Function App, App Service plan and Storage Account) |
 | Csm Api Host | Cosmo Tech Platform API host |
-| Az Cli ID	| Client id of the dedicated app registration (see pre-requisites) |
-| Az Cli Secret | Secret create of the dedicated app registration (see pre-requisites) |
-| Csm Api Scope | Scope for accesing the Cosmo Tech Platform API |
+| Csm Api Scope | Scope for accessing the Cosmo Tech Platform API (must end with /.default) |
+| Az Cli ID	| Client ID of the dedicated app registration (see pre-requisites) |
+| Az Cli Secret | Client Secret create of the dedicated app registration (see pre-requisites) |
 | Package Address | URL of the Azure function package to be deployed  - IMPORTANT : pick the URL from the latest release, ex [release 2.1.10](https://github.com/Cosmo-Tech/supplychain-azure-function-dataset-download/releases/download/2.1.10/artifact.zip) |
 
 <br>
@@ -49,11 +48,12 @@ This azure function app aims to be integrated in the Cosmo Tech Supply Chain Web
 
 ## Configure CORS
 
-- Check option Enable Access-Control-Allow-Credentials
+### Request Credentials
+Check option _*Enable Access-Control-Allow-Credentials*_
 
-- Allowed Origins : Cosmo Tech Supply Chain web-app URL
-
-- Optional configuration dev usage : http://localhost:3000
+### Allowed Origins :
+- Add the URL of the Cosmo Tech Supply Chain Web-App
+- For dev usage (optional) add http://localhost:3000
 
 <br>
 
@@ -63,6 +63,7 @@ This azure function app aims to be integrated in the Cosmo Tech Supply Chain Web
 
 ## Configure for the flowchart
 
+### in file "src/config/AppInstance.js"
 
 ```javascript
 export const AZURE_FUNCTION_FLOWCHART_URL =
@@ -73,6 +74,8 @@ export const AZURE_FUNCTION_FLOWCHART_HEADERS = {
 ```
 
 ## Configure for the lever tables
+
+### in file "src/config/ScenarioParameters.js", for each lever table
 
 Example with the demand plan table
 
