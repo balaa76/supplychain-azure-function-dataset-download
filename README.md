@@ -7,6 +7,16 @@ This Supply Chain specific version is based on the [Cosmotech Azure function Sce
 
 This azure function app aims to be integrated in the Cosmo Tech Supply Chain Web-app : [azure-supplychain-webapp](https://github.com/Cosmo-Tech/azure-supplychain-webapp) for Cosmo Tech internal use or [azure-supplychain-webapp-shared](https://github.com/Cosmo-Tech/azure-supplychain-webapp-shared) for external use
 
+# Build
+
+## How to build a deployable file
+
+Running the following commands in a terminal will create a file `Artifact.zip` which can then be used for deployment 
+
+```bash
+pip install --target .python_packages/lib/site-packages/ -r requirements.txt
+zip -r artifact.zip . -x ".git/*" ".github/*" ".gitignore"
+```
 
 # Deploy 
 
@@ -29,19 +39,19 @@ This azure function app aims to be integrated in the Cosmo Tech Supply Chain Web
 
 ## Installation options
 
-| Parameter | Note |
-| ----------- | ----------- |
-| Subscription | Choose same as the related platform and webapp |
-| Resource group | Choose same as the related platform and webapp |
-| Region | Choose same as related platform and webapp |
-| Site Name | Choose a name for the function app or leave the default value for auto-generated name |
-| Storage Account Name | Choose a name for the storage account required for the function app or leave the default value for auto-generated name |
-| Location | Location for the resources to be created (Function App, App Service plan and Storage Account) |
-| Csm Api Host | Cosmo Tech Platform API host |
-| Csm Api Scope | Scope for accessing the Cosmo Tech Platform API (must end with /.default) |
-| Az Cli ID	| Client ID of the dedicated app registration (see pre-requisites) |
-| Az Cli Secret | Client Secret create of the dedicated app registration (see pre-requisites) |
-| Package Address | URL of the Azure function package to be deployed  - IMPORTANT : pick the URL from the latest release, ex [release 2.1.10](https://github.com/Cosmo-Tech/supplychain-azure-function-dataset-download/releases/download/2.1.10/artifact.zip) |
+| Parameter            | Note                                                                                                                                                                                                                                       |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Subscription         | Choose same as the related platform and webapp                                                                                                                                                                                             |
+| Resource group       | Choose same as the related platform and webapp                                                                                                                                                                                             |
+| Region               | Choose same as related platform and webapp                                                                                                                                                                                                 |
+| Site Name            | Choose a name for the function app or leave the default value for auto-generated name                                                                                                                                                      |
+| Storage Account Name | Choose a name for the storage account required for the function app or leave the default value for auto-generated name                                                                                                                     |
+| Location             | Location for the resources to be created (Function App, App Service plan and Storage Account)                                                                                                                                              |
+| Csm Api Host         | Cosmo Tech Platform API host                                                                                                                                                                                                               |
+| Csm Api Scope        | Scope for accessing the Cosmo Tech Platform API (must end with /.default)                                                                                                                                                                  |
+| Az Cli ID	           | Client ID of the dedicated app registration (see pre-requisites)                                                                                                                                                                           |
+| Az Cli Secret        | Client Secret create of the dedicated app registration (see pre-requisites)                                                                                                                                                                |
+| Package Address      | URL of the Azure function package to be deployed  - IMPORTANT : pick the URL from the latest release, ex [release 2.1.10](https://github.com/Cosmo-Tech/supplychain-azure-function-dataset-download/releases/download/2.1.10/artifact.zip) |
 
 <br>
 
