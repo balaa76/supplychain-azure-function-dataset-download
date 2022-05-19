@@ -67,8 +67,30 @@ Check option _*Enable Access-Control-Allow-Credentials*_
 
 <br>
 
-# Integrate in the Cosmo Tech Supply Chain web-app
 
+# Secure the Azure Function
+
+The azure function includes a first level of securizartion with the host key.<br>
+This keys being included in the web application, we need a second layer of securization by limiting the azure function calls to the users being authorized to the Cosmo Tech API :
+
+## Add identity provider
+
+- Go to Authentication
+- Add identity provider
+- Select "Microsoft"
+- In "App registration type", select "Pick an existing app registration in this directory"
+<br>
+
+- Restrict access : "Require authentication"
+- Unauthenticated requests : HTTP 401
+- Token store : leave checked
+<br>
+## Configure audience
+- In the created identity provider, click on "Edit"
+- Allowed token audiences : "https://_*cosmo platform*_.api.cosmotech.com" 
+Note : you may need to specify the core platform app registration id instead of the API 
+
+# Integrate in the Cosmo Tech Supply Chain web-app
 
 
 ## Configure for the flowchart
