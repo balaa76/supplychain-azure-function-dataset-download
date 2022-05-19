@@ -87,6 +87,7 @@ This keys being included in the web application, we need a second layer of secur
 - Unauthenticated requests : HTTP 401
 - Token store : leave checked
 <br>
+
 ## Configure audience
 - In the created identity provider, click on "Edit"
 - Allowed token audiences : Enter the appplication ID URL of the platform app registration (of type  "https://_*cosmo platform url*_" or "api://_*platform app registrion application id uri*_" ) 
