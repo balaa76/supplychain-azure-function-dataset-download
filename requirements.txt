@@ -1,4 +1,4 @@
 # Do not include azure-functions-worker as it may conflict with the Azure Functions platform
 
 CosmoTech-Acceleration-Library
-CosmoTech-SupplyChain
+CosmoTech-SupplyChain==2.2.2
