@@ -18,17 +18,17 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
     r.files = updated_dataset
     with FromDictToTableConverter(reader=r, writer=w, simulation_id=None, keep_duplicate=True) as dt:
         dt.convert()
-    columns_names = ['Label', 'source', 'target', 'Duration', 'Mode']
+    columns_names = ['Label', 'source', 'target', 'Duration']
     columns = [{'field': _name} for _name in columns_names]
     for c in columns:
-        if c['field'] in ['Label','source', 'target', 'Mode']:
+        if c['field'] in ['Label','source', 'target']:
             c['type'] = ['nonEditable']
         if c['field'] in ['Duration']:
             c['type'] = ['int']
             c['minValue'] = 0
             out = list()
     for element in w.files['Transport']:
-        out.append(dict(Label=element['Label'], source=element['source'], target=element['target'], Duration=element['Duration'], Mode=element['Mode']))
+        out.append(dict(Label=element['Label'], source=element['source'], target=element['target'], Duration=element['Duration']))
     return {'columns': columns, 'rows': sorted(out, key=lambda r: r['source'])}
 
 
