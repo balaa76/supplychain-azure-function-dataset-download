@@ -11,7 +11,7 @@ import os
 import json
 
 
-def apply_update(content: dict, scenario_data: dict) -> dict:
+def apply_update(content: dict, scenario_data: dict, apply_transport_duration: bool = False) -> dict:
     dataset_content = content
     # Apply you transformation here
     for dataset_id, dataset in content['datasets'].items():
@@ -50,7 +50,8 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
                 })
 
         add_file_parameter("demand_plan")
-        add_file_parameter("transport_duration")
+        if (apply_transport_duration):
+            add_file_parameter("transport_duration")
         add_file_parameter("production_resource_opening_time")
         if value in content['datasets']:
             continue

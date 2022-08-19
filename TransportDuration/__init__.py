@@ -5,7 +5,7 @@ from Supplychain.Transform.from_dict_to_table import FromDictToTableConverter
 
 
 def apply_update(content: dict, scenario_data: dict) -> dict:
-    updated_dataset = update_dataset(content, scenario_data)
+    updated_dataset = update_dataset(content, scenario_data, False)
 
     # Default values to avoid error 500 if time info were not filed
     updated_dataset.setdefault('Configuration', [{}])
@@ -18,17 +18,17 @@ def apply_update(content: dict, scenario_data: dict) -> dict:
     r.files = updated_dataset
     with FromDictToTableConverter(reader=r, writer=w, simulation_id=None, keep_duplicate=True) as dt:
         dt.convert()
-    columns_names = ['source', 'target', 'Duration']
+    columns_names = ['Label', 'source', 'target', 'Duration', 'Mode']
     columns = [{'field': _name} for _name in columns_names]
     for c in columns:
-        if c['field'] in ['source', 'target']:
+        if c['field'] in ['Label','source', 'target', 'Mode']:
             c['type'] = ['nonEditable']
         if c['field'] in ['Duration']:
             c['type'] = ['int']
             c['minValue'] = 0
-    out = list()
+            out = list()
     for element in w.files['Transport']:
-        out.append(dict(source=element['source'], target=element['target'], Duration=element['Duration']))
+        out.append(dict(Label=element['Label'], source=element['source'], target=element['target'], Duration=element['Duration'], Mode=element['Mode']))
     return {'columns': columns, 'rows': sorted(out, key=lambda r: r['source'])}
 
 
