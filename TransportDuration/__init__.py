@@ -5,7 +5,7 @@ from Supplychain.Transform.from_dict_to_table import FromDictToTableConverter
 
 
 def apply_update(content: dict, scenario_data: dict) -> dict:
-    updated_dataset = update_dataset(content, scenario_data)
+    updated_dataset = update_dataset(content, scenario_data, False)
 
     # Default values to avoid error 500 if time info were not filed
     updated_dataset.setdefault('Configuration', [{}])
